@@ -10,6 +10,9 @@ export function convertSqlDebugToPostgres(debugSql, params) {
     } else if (typeof param === "string") {
       // Convert string to PostgreSQL string format
       replacement = `'${param}'`;
+    } else if (typeof param === "number") {
+      // Use the number as is
+      replacement = param;
     } else {
       // For other types (e.g., boolean), convert to string representation
       replacement = param.toString();
