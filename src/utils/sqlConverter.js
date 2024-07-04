@@ -18,8 +18,9 @@ export function convertSqlDebugToPostgres(debugSql, params) {
       replacement = param.toString();
     }
 
-    // Replace all occurrences of the placeholder in the SQL string
-    convertedSql = convertedSql.split(placeholder).join(replacement);
+    // Use a regular expression to replace the placeholder
+    const regex = new RegExp(`\\$${index + 1}(?!\\d)`, "g");
+    convertedSql = convertedSql.replace(regex, replacement);
   });
 
   return convertedSql;
